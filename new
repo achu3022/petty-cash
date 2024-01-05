@@ -1,0 +1,68 @@
+
+                            $updateQuery = "UPDATE $tableName SET main_cat = '$main_cat', sub_cat = '$sub_cat', job = '$job', so = $so, wo = $wo, company = $company, division = $division, sub_div = $sub_div, amount = $amount, remarks = $remarks WHERE bill_date = '$formattedDate' AND id = '$change[0]'";
+                            $updateResult = $con->query($updateQuery);
+
+                            if ($updateResult === false) {
+                                // Handle the case where the update query fails
+                                echo 'Error updating record: ' . $con->error;
+                                                    
+            } else {
+
+///Update existing record 
+$checkQuery = "SELECT COUNT(*) FROM $tableName WHERE bill_date = ? AND bill_id = ?";
+$checkStmt = $con->prepare($checkQuery);
+$checkStmt->bind_param('ss', $formattedDate, $change[0]);
+$checkStmt->execute();
+$checkStmt->bind_result($rowCount);
+$checkStmt->fetch();
+$checkStmt->close();
+
+
+
+                            // Insert a new record
+                            $main_cat = isset($change[4]) ? $change[4] : 'DEFAULT_VALUE';
+                            $sub_cat = isset($change[5]) ? $change[5] : 'DEFAULT_VALUE';
+                            $job = isset($change[6]) ? $change[6] : 'DEFAULT_VALUE';
+                            $so = isset($change[7]) ? "'$change[7]'" : "NULL";
+                            $wo = isset($change[8]) ? "'$change[8]'" : "NULL";
+                            $company = isset($change[9]) ? "'$change[9]'" : "NULL";
+                            $division = isset($change[10]) ? "'$change[10]'" : "NULL";
+                            $sub_div = isset($change[11]) ? "'$change[11]'" : "NULL";
+                            $amount = isset($change[12]) ? "'$change[12]'" : "NULL";
+                            $remarks = isset($change[13]) ? "'$change[13]'" : "NULL";
+                            $insertQuery="INSERT INTO $tableName (bill_id, bill_date, main_cat, sub_cat, job, so, wo, company, division, sub_div, amount, remarks, bill_status, user_id)
+                            VALUES ('', '$formattedDate', '$main_cat', '$sub_cat', '$job', '$so', '$wo', '$company', '$division', '$sub_div', '$amount', '$remarks', 0, '')";
+                            $insertResult = $con->query($insertQuery);
+
+                            if ($insertResult === false) {
+                                // Handle the case where the insert query fails
+                                echo 'Error inserting record: ' . $con->error;
+                            }
+                        }
+                    } else {
+                        // Handle the case where date conversion fails
+                        echo 'Error converting date format for value ' . $change[3];
+                        // Log or handle the error appropriately
+                        continue; // Skip processing this row if date conversion fails
+                    }
+                } else {
+                    // The date is already in 'Y-m-d' format, no conversion needed
+                    $formattedDate = $change[3];
+                }
+            } else {
+                // Handle the case where the date or id key is not defined in $change
+                echo 'Error: Date or ID key not defined in $change';
+                continue; // Skip processing this row if the date or id key is not defined
+            }
+        }
+
+        echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
+    } catch (mysqli_sql_exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Database Error: ' . $e->getMessage()]);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'No changes to save']);
+}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>

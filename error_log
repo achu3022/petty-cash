@@ -1,0 +1,8 @@
+[17-Nov-2023 06:48:33 UTC] PHP Warning:  include(header.php): Failed to open stream: No such file or directory in /home/effism/public_html/demopetty/view-pettycash.php on line 1
+[17-Nov-2023 06:48:33 UTC] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/effism/public_html/demopetty/view-pettycash.php on line 1
+[17-Nov-2023 06:48:33 UTC] PHP Warning:  include(footer.php): Failed to open stream: No such file or directory in /home/effism/public_html/demopetty/view-pettycash.php on line 237
+[17-Nov-2023 06:48:33 UTC] PHP Warning:  include(): Failed opening 'footer.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/effism/public_html/demopetty/view-pettycash.php on line 237
+[17-Nov-2023 06:49:39 UTC] PHP Warning:  include(header.php): Failed to open stream: No such file or directory in /home/effism/public_html/demopetty/viewpettycash.php on line 1
+[17-Nov-2023 06:49:39 UTC] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/effism/public_html/demopetty/viewpettycash.php on line 1
+[17-Nov-2023 06:49:39 UTC] PHP Warning:  include(footer.php): Failed to open stream: No such file or directory in /home/effism/public_html/demopetty/viewpettycash.php on line 237
+[17-Nov-2023 06:49:39 UTC] PHP Warning:  include(): Failed opening 'footer.php' for inclusion (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/effism/public_html/demopetty/viewpettycash.php on line 237
